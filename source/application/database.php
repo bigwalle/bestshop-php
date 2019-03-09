@@ -2,7 +2,7 @@
 
 // 数据库配置
 $config = [
-    'host' => '111.230.133.129',
+    'host' => '127.0.0.1',
     'database' => 'xcx_jtwenty_club',
     'username' => 'xcx_jtwenty_club',
     'password' => '6pkszwj2rDDzbwFS',

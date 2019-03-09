@@ -8,7 +8,7 @@
 
 namespace app\common\model;
 
-
+use think\Request;
 class School extends BaseModel
 {
     protected $name = 'school';
@@ -24,4 +24,17 @@ class School extends BaseModel
     {
         return self::regionCache()['all'];
     }
+
+    /**
+     * 获取学校列表
+     * @return \think\Paginator
+     * @throws \think\exception\DbException
+     */
+    public function getList()
+    {
+        $request = Request::instance();
+        return $this->order(['id' => 'desc'])
+            ->paginate(15, false, ['query' => $request->request()]);
+    }
+
 }
