@@ -28,12 +28,12 @@ class Order extends OrderModel
     }
     public function getAll($filter)
     {
-        $beginToday=mktime(0,0,0,date('m'),date('d')-10,date('Y'));
+        $beginToday=mktime(0,0,0,date('m'),date('d'),date('Y'));
         $endToday=mktime(0,0,0,date('m'),date('d')+1,date('Y'))-1;
         return $this->with(['goods.image', 'address', 'user'])
             ->where($filter)
             ->where('create_time','between time',[$beginToday,$endToday])
-            ->order(['create_time' => 'desc'])
+            ->order(['create_time' => 'asc'])
             ->select();
     }
     /**

@@ -10,10 +10,13 @@
                         <div class="am-form-group">
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
-                                    <a class="am-btn am-btn-default am-btn-success am-radius"
-                                       href="<?= url('order/export_excel') ?>">
-                                        <span class="am-icon-file-excel-o"></span> 导出
-                                    </a>
+                                    <?php if (strpos($title,"待发货")!== false): ?>
+                                        <a class="am-btn am-btn-default am-btn-success am-radius"
+                                           href="<?= url('order/export_excel') ?>">
+                                            <span class="am-icon-file-excel-o"></span> 导出
+                                        </a>
+                                    <?php endif; ?>
+
                                 </div>
                             </div>
                         </div>
