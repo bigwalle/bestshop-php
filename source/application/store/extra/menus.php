@@ -79,7 +79,13 @@ return [
     'name' => '学校管理',
     'icon' => 'icon-marketing',
     'index' => 'school/index',
-],
+    'submenu' => [
+            [
+                'name' => '学校管理',
+                'index' => 'school/index',
+            ]
+        ]
+    ],
 //    'marketing' => [
 //        'name' => '营销管理',
 //        'icon' => 'icon-marketing',

@@ -19,6 +19,14 @@
                                 <th>操作</th>
                             </tr>
                             </thead>
+                            <tr>
+                                <td>选择时间：</td>
+                                <td>
+                                    <a class="tpl-table-black-operation-green"
+                                       href="<?= url('order/export_excel', []) ?>">
+                                        导出</a>
+                                </td>
+                            </tr>
                             <tbody>
                             <?php if (!$list->isEmpty()): foreach ($list as $order): ?>
                                 <tr class="order-empty">
@@ -29,6 +37,7 @@
                                         <span class="am-margin-right-lg"> <?= $order['create_time'] ?></span>
                                         <span class="am-margin-right-lg">订单号：<?= $order['order_no'] ?></span>
                                     </td>
+
                                 </tr>
                                 <?php $i = 0;
                                 foreach ($order['goods'] as $goods): $i++; ?>
