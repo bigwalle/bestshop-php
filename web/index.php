@@ -1,7 +1,8 @@
 <?php
 
 // [ 应用入口文件 ]
-
+//开启调试模式
+define('APP_DEBUG', true);
 // 定义运行目录
 define('WEB_PATH', __DIR__ . '/');
 

@@ -6,6 +6,18 @@
                     <div class="widget-title am-cf"><?= $title ?></div>
                 </div>
                 <div class="widget-body am-fr">
+                    <div class="am-u-sm-12 am-u-md-6 am-u-lg-6">
+                        <div class="am-form-group">
+                            <div class="am-btn-toolbar">
+                                <div class="am-btn-group am-btn-group-xs">
+                                    <a class="am-btn am-btn-default am-btn-success am-radius"
+                                       href="<?= url('order/export_excel') ?>">
+                                        <span class="am-icon-file-excel-o"></span> 导出
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="order-list am-scrollable-horizontal am-u-sm-12 am-margin-top-xs">
                         <table width="100%" class="am-table am-table-centered
                         am-text-nowrap am-margin-bottom-xs">
@@ -19,14 +31,7 @@
                                 <th>操作</th>
                             </tr>
                             </thead>
-                            <tr>
-                                <td>选择时间：</td>
-                                <td>
-                                    <a class="tpl-table-black-operation-green"
-                                       href="<?= url('order/export_excel', []) ?>">
-                                        导出</a>
-                                </td>
-                            </tr>
+
                             <tbody>
                             <?php if (!$list->isEmpty()): foreach ($list as $order): ?>
                                 <tr class="order-empty">
@@ -120,3 +125,8 @@
     </div>
 </div>
 
+<script>
+    $(function() {
+
+    });
+</script>

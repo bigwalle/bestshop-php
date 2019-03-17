@@ -26,7 +26,16 @@ class Order extends OrderModel
                 'query' => Request::instance()->request()
             ]);
     }
-
+    public function getAll($filter)
+    {
+        $beginToday=mktime(0,0,0,date('m'),date('d')-10,date('Y'));
+        $endToday=mktime(0,0,0,date('m'),date('d')+1,date('Y'))-1;
+        return $this->with(['goods.image', 'address', 'user'])
+            ->where($filter)
+            ->where('create_time','between time',[$beginToday,$endToday])
+            ->order(['create_time' => 'desc'])
+            ->select();
+    }
     /**
      * 确认发货
      * @param $data
