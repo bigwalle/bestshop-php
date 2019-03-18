@@ -58,6 +58,8 @@ class Order extends Controller
      */
     function export_excel()
     {
+        ini_set('memory_limit', '-1');
+
         $model = new OrderModel;
         $list = $model->getAll([
             'pay_status' => 20,
@@ -70,7 +72,7 @@ class Order extends Controller
         vendor("PHPExcel.PHPExcel");
         $excel = new \PHPExcel(); //引用phpexcel
         iconv('UTF-8', 'gb2312', $name); //针对中文名转码
-        $header= ['ID','名称','总价','重量','订单号',"付款时间","取货码","收货人","手机号","地址"]; //表头,名称可自定义
+        $header= ['ID','名称','总价(元)','重量(斤)','订单号',"付款时间","取货码","收货人","手机号","地址"]; //表头,名称可自定义
         $excel->setActiveSheetIndex(0);
         $excel->getActiveSheet()->setTitle($name); //设置表名
         $excel->getActiveSheet()->getDefaultRowDimension()->setRowHeight(18);
@@ -109,9 +111,25 @@ class Order extends Controller
             {
                 //从第二行开始写入数据（第一行为表头）
                 $excel->getActiveSheet()->setCellValue('A'.($k+2),$v['order_id']);
-                $excel->getActiveSheet()->setCellValue('B'.($k+2),$v['goods'][0]['goods_name']);
+
+                $goods="";
+                $num="";
+                for($j=0;$j<count($v['goods']);$j++){
+                    $goodsname=$v['goods'][$j]['goods_name'];
+                    $totalnum=$v['goods'][$j]['total_num'];
+
+                    if ($j==(count($v['goods'])-1)){
+                        $goods.="$goodsname";
+                        $num.="$totalnum";
+                    }else{
+                        $goods.="$goodsname,";
+                        $num.="$totalnum,";
+                    }
+
+                }
+                $excel->getActiveSheet()->setCellValue('B'.($k+2),$goods);
                 $excel->getActiveSheet()->setCellValue('C'.($k+2),$v['total_price']);
-                $excel->getActiveSheet()->setCellValue('D'.($k+2),intval(""));
+                $excel->getActiveSheet()->setCellValue('D'.($k+2),"$num");
                 //设置数字的科学计数法显示为文本
                 $excel->getActiveSheet()->setCellValueExplicit('E'.($k+2),strval($v['order_no']),\PHPExcel_Cell_DataType::TYPE_STRING);
                 $excel->getActiveSheet()->setCellValue('F'.($k+2),date("Y-m-d H:i:s",$v['pay_time']));

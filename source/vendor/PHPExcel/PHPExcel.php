@@ -388,7 +388,12 @@ class PHPExcel
         $this->addCellXf(new PHPExcel_Style);
         $this->addCellStyleXf(new PHPExcel_Style);
     }
-
+    public function Destroy() {
+        foreach($this->_workSheetCollection as $index => $dummy) {
+            $this->_workSheetCollection[$index]->Destroy();
+            $this->_workSheetCollection[$index] = null;
+        }
+    }
     /**
      * Code to execute when this worksheet is unset()
      *

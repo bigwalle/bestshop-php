@@ -458,6 +458,12 @@ class PHPExcel_Worksheet implements PHPExcel_IComparable
 
         return $pValue;
     }
+    public function Destroy() {
+        foreach($this->_cellCollection as $index => $dummy) {
+            $this->_cellCollection[$index] = null;
+        }
+    }
+
 
     /**
      * Get collection of cells
